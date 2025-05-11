@@ -48,6 +48,7 @@ async def openai_generate(text: str, purpose: str, state: str = None, user_input
         purpose: Either "conversation" or "policy".
         state: Current FSM state (e.g., "uploading_passport").
         user_input: User's latest message for context (optional).
+        data: Extracted data from photos (optional).
 
     Returns:
         Generated response as a string.
@@ -331,7 +332,7 @@ async def handle_price_quotation(message: Message, state: FSMContext):
         await state.clear()
     elif message.text.lower() == 'disagree':
         apology = await openai_generate(
-            'Apologize and inform the user that 100 USD is the only available price.',
+            'Apologize and inform the user that this is the only available price for car insurance policy and offer to start all over again using /start command.',
             purpose='conversation',
             state=None
         )
